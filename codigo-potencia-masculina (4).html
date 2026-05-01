@@ -1,0 +1,1125 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Código da Potência Masculina</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #D4A017;
+    --gold-light: #F0C040;
+    --dark: #0A0A0A;
+    --dark2: #111111;
+    --dark3: #1A1A1A;
+    --dark4: #222222;
+    --text: #E8E8E8;
+    --text-muted: #999;
+    --danger: #C0392B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Oswald', sans-serif;
+    line-height: 1.2;
+  }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .announce-bar {
+    background: var(--gold);
+    color: #000;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .announce-bar span { font-weight: 800; }
+
+  /* ── CTA BUTTON ── */
+  .btn-cta {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: #000;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(212,160,23,0.45);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.18) 100%);
+    pointer-events: none;
+  }
+
+  .btn-cta:active { transform: scale(0.97); }
+  .btn-cta:hover { box-shadow: 0 8px 40px rgba(212,160,23,0.65); transform: translateY(-2px); }
+
+  .btn-sub { display: block; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; margin-top: 4px; opacity: 0.75; text-transform: none; letter-spacing: 0; }
+
+  /* ── SECTION WRAPPER ── */
+  .section { padding: 56px 20px; }
+  .section--dark2 { background: var(--dark2); }
+  .section--dark3 { background: var(--dark3); }
+  .section--dark4 { background: var(--dark4); }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(180deg, #0A0A0A 0%, #111 100%);
+    padding: 60px 20px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 340px; height: 340px;
+    background: radial-gradient(circle, rgba(212,160,23,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(212,160,23,0.15);
+    border: 1px solid rgba(212,160,23,0.4);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 8vw, 48px);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: #ccc;
+    margin-bottom: 36px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat { text-align: center; }
+  .hero-stat strong { display: block; font-family: 'Oswald', sans-serif; font-size: 26px; color: var(--gold); }
+  .hero-stat span { font-size: 12px; color: var(--text-muted); }
+
+  /* ── PROBLEMA ── */
+  .problem-list { list-style: none; margin: 24px 0; }
+  .problem-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 16px;
+  }
+
+  .problem-list li:last-child { border-bottom: none; }
+
+  .problem-icon {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: rgba(192,57,43,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 36px);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .section-desc { color: #bbb; font-size: 16px; margin-bottom: 8px; }
+
+  /* ── REALIDADE ── */
+  .reality-box {
+    background: linear-gradient(135deg, #1a0a00, #1A1A1A);
+    border: 1px solid rgba(212,160,23,0.3);
+    border-left: 4px solid var(--gold);
+    border-radius: 12px;
+    padding: 28px 22px;
+    margin: 24px 0;
+  }
+
+  .reality-box p {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 600;
+    line-height: 1.3;
+    color: #fff;
+  }
+
+  .reality-box p em { font-style: normal; color: var(--gold); }
+
+  /* ── SOLUÇÃO ── */
+  .product-card {
+    background: linear-gradient(135deg, #161206, #1A1A1A);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 32px 22px;
+    text-align: center;
+    margin: 28px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .product-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .product-card h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .product-card p { color: #bbb; font-size: 16px; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .feature-item {
+    background: rgba(212,160,23,0.07);
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+
+  .feature-item .f-icon { font-size: 28px; margin-bottom: 8px; }
+  .feature-item span { font-size: 13px; font-weight: 600; display: block; color: #ddd; }
+
+  /* ── BENEFÍCIOS ── */
+  .benefit-list { list-style: none; margin: 24px 0; }
+  .benefit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 16px;
+  }
+
+  .benefit-list li:last-child { border-bottom: none; }
+
+  .benefit-icon {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: rgba(212,160,23,0.15);
+    border: 1px solid rgba(212,160,23,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 800;
+    margin-top: 2px;
+  }
+
+  /* ── TRANSFORMAÇÃO ── */
+  .transform-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin: 28px 0;
+  }
+
+  .transform-card {
+    border-radius: 14px;
+    padding: 22px 16px;
+  }
+
+  .transform-card.before {
+    background: rgba(80,10,10,0.3);
+    border: 1px solid rgba(192,57,43,0.3);
+  }
+
+  .transform-card.after {
+    background: rgba(10,60,10,0.3);
+    border: 1px solid rgba(39,174,96,0.3);
+  }
+
+  .transform-card h4 {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  .transform-card.before h4 { color: #e74c3c; }
+  .transform-card.after h4 { color: #2ecc71; }
+
+  .transform-card ul { list-style: none; }
+  .transform-card ul li { font-size: 14px; padding: 6px 0; color: #ccc; }
+  .transform-card.before ul li::before { content: "✗ "; color: #e74c3c; }
+  .transform-card.after ul li::before { content: "✓ "; color: #2ecc71; }
+
+  .transform-arrow {
+    font-size: 28px;
+    color: var(--gold);
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  /* ── O QUE VAI RECEBER ── */
+  .receive-list { list-style: none; margin: 24px 0; }
+  .receive-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: rgba(212,160,23,0.05);
+    border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+
+  .receive-num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: var(--gold);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-top: 1px;
+  }
+
+  /* ── DEPOIMENTOS ── */
+  .testimonial-card {
+    background: var(--dark3);
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 16px;
+  }
+
+  .testimonial-stars { color: var(--gold); font-size: 18px; margin-bottom: 10px; }
+  .testimonial-text { font-size: 15px; color: #ccc; line-height: 1.7; margin-bottom: 14px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #8B6914);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #000;
+    flex-shrink: 0;
+  }
+
+  .testimonial-name { font-weight: 700; font-size: 15px; }
+  .testimonial-loc { font-size: 12px; color: var(--text-muted); }
+
+  /* ── GARANTIA ── */
+  .guarantee-box {
+    background: linear-gradient(135deg, #040d06, #0d1a0d);
+    border: 2px solid rgba(39,174,96,0.4);
+    border-radius: 16px;
+    padding: 30px 22px;
+    text-align: center;
+    margin: 8px 0;
+  }
+
+  .guarantee-icon { font-size: 64px; margin-bottom: 14px; display: block; }
+  .guarantee-box h3 { font-size: 24px; color: #2ecc71; margin-bottom: 10px; text-transform: uppercase; }
+  .guarantee-box p { color: #bbb; font-size: 15px; }
+
+  /* ── OFERTA ── */
+  .offer-box {
+    background: linear-gradient(135deg, #160e00, #1A1A1A);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 32px 22px;
+    text-align: center;
+    margin: 8px 0;
+  }
+
+  .offer-badge {
+    display: inline-block;
+    background: var(--danger);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+
+  .offer-original {
+    font-size: 20px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+
+  .offer-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 54px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .offer-price span { font-size: 22px; vertical-align: top; margin-top: 10px; display: inline-block; }
+  .offer-once { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+  .offer-savings {
+    display: inline-block;
+    background: rgba(39,174,96,0.1);
+    border: 1px solid rgba(39,174,96,0.3);
+    color: #2ecc71;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  /* ── URGÊNCIA ── */
+  .urgency-bar {
+    background: var(--danger);
+    color: #fff;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  /* ── FAQ ── */
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text);
+    user-select: none;
+    gap: 12px;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,160,23,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--gold);
+    transition: transform 0.2s;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+    color: #bbb;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding-bottom: 16px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    text-align: center;
+    padding: 28px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── FLOATING CTA ── */
+  .floating-cta {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--dark);
+    border-top: 2px solid var(--gold);
+    padding: 14px 20px;
+    z-index: 200;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .floating-cta.visible { transform: translateY(0); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── PULSE ── */
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 6px 30px rgba(212,160,23,0.45); }
+    50% { box-shadow: 0 8px 50px rgba(212,160,23,0.75); }
+  }
+
+  .btn-cta.pulse { animation: pulse-gold 2s ease-in-out infinite; }
+
+  /* ── DIVIDER ── */
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0;
+    border: none;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .countdown-unit {
+    text-align: center;
+    background: rgba(212,160,23,0.1);
+    border: 1px solid rgba(212,160,23,0.3);
+    border-radius: 10px;
+    padding: 10px 16px;
+    min-width: 64px;
+  }
+
+  .countdown-unit strong {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .countdown-unit span { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── METHOD SECTION ── */
+  .method-steps { margin: 24px 0; }
+  .method-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .method-step-num {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--gold);
+  }
+
+  .method-step-text h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .method-step-text p { font-size: 14px; color: #bbb; }
+
+  @media (max-width: 360px) {
+    .transform-grid { grid-template-columns: 1fr; }
+    .transform-arrow { transform: rotate(90deg); }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  🔥 <span>OFERTA LIMITADA</span> — Apenas 5.500 Kz hoje. Não perca!
+</div>
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-badge">Método 100% Digital · Acesso Imediato</div>
+  <h1>Se você não tem confiança,<em>ninguém vai te respeitar.</em></h1>
+  <p>Descubra como desenvolver uma mentalidade forte, disciplina e postura de homem respeitado — a partir de hoje.</p>
+  <a href="https://pay.kursinha.com/c/69c1b9b3cd13c7734f7f5803" class="btn-cta pulse">
+    Quero me tornar um homem mais forte
+    <span class="btn-sub">Acesso imediato por apenas 5.500 Kz</span>
+  </a>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>+500</strong>
+      <span>Homens transformados</span>
+    </div>
+    <div class="hero-stat">
+      <strong>7</strong>
+      <span>Dias de garantia</span>
+    </div>
+    <div class="hero-stat">
+      <strong>100%</strong>
+      <span>Prático</span>
+    </div>
+  </div>
+</section>
+
+<hr class="gold-divider">
+
+<!-- ══════════════════════════════ PROBLEMA ══════════════════════════════ -->
+<section class="section section--dark2 fade-in">
+  <span class="section-label">O Problema</span>
+  <h2 class="section-title">Reconhece <span>alguma</span> destas situações?</h2>
+  <p class="section-desc">Se você se viu em algum destes pontos, este método foi criado para você.</p>
+
+  <ul class="problem-list">
+    <li>
+      <div class="problem-icon">😶</div>
+      <div><strong>Ninguém te leva a sério</strong> — Você fala e as pessoas ignoram. Seus conselhos são descartados. Você está no grupo mas parece invisível.</div>
+    </li>
+    <li>
+      <div class="problem-icon">😰</div>
+      <div><strong>Falta de confiança social</strong> — Em festas, no trabalho, com mulheres — você sempre sente que está aquém do que deveria ser.</div>
+    </li>
+    <li>
+      <div class="problem-icon">😔</div>
+      <div><strong>Sem disciplina</strong> — Começa projectos e não termina. Sabe o que deve fazer mas não faz. Procrastina e se culpa depois.</div>
+    </li>
+    <li>
+      <div class="problem-icon">😤</div>
+      <div><strong>Vida desorganizada</strong> — Rotinas que não funcionam, finanças no caos, energia desperdiçada com coisas sem importância.</div>
+    </li>
+    <li>
+      <div class="problem-icon">😞</div>
+      <div><strong>Sem direcção clara</strong> — Sente que os outros avançam enquanto você fica parado. Aquela sensação de estar atrasado na vida.</div>
+    </li>
+  </ul>
+</section>
+
+<!-- ══════════════════════════════ REALIDADE ══════════════════════════════ -->
+<section class="section section--dark3 fade-in">
+  <span class="section-label">A Verdade Dura</span>
+  <div class="reality-box">
+    <p>"Ninguém vai te respeitar enquanto <em>você não mudar sua postura.</em> O mundo não espera. As oportunidades não esperam. E as pessoas ao teu redor já estão a te julgar."</p>
+  </div>
+  <p class="section-desc" style="margin-top:20px; font-size:17px; color:#ccc;">A confiança não é algo que nasce com você ou não nasce. <strong style="color:#fff">Ela é treinada.</strong> E enquanto você não treinar, vai continuar a perder — respeito, oportunidades e tempo.</p>
+  <p class="section-desc" style="margin-top:14px; color:#bbb; font-size:16px;">O problema não é a tua situação. O problema é que ninguém te ensinou <strong style="color:#fff">como mudar de verdade.</strong></p>
+</section>
+
+<hr class="gold-divider">
+
+<!-- ══════════════════════════════ SOLUÇÃO ══════════════════════════════ -->
+<section class="section section--dark2 fade-in">
+  <span class="section-label">A Solução</span>
+  <h2 class="section-title">Apresentando o <span>Método</span></h2>
+
+  <div class="product-card">
+    <span class="product-icon">⚡</span>
+    <h3>Código da Potência Masculina</h3>
+    <p>Um guia directo ao ponto, criado para homens que querem resultados reais — sem teoria, sem enrolação.</p>
+
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="f-icon">💪</div>
+        <span>Confiança Real</span>
+      </div>
+      <div class="feature-item">
+        <div class="f-icon">🎯</div>
+        <span>Disciplina Diária</span>
+      </div>
+      <div class="feature-item">
+        <div class="f-icon">🧠</div>
+        <span>Mentalidade Forte</span>
+      </div>
+      <div class="feature-item">
+        <div class="f-icon">👑</div>
+        <span>Postura Masculina</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://pay.kursinha.com/c/69c1b9b3cd13c7734f7f5803" class="btn-cta">
+    Quero o Código da Potência Agora
+    <span class="btn-sub">👇 Clica aqui e transforma a tua vida</span>
+  </a>
+</section>
+
+<!-- ══════════════════════════════ BENEFÍCIOS ══════════════════════════════ -->
+<section class="section fade-in">
+  <span class="section-label">Benefícios</span>
+  <h2 class="section-title">O que <span>vai mudar</span> em ti</h2>
+
+  <ul class="benefit-list">
+    <li>
+      <div class="benefit-icon">✓</div>
+      <div><strong>Mais respeito das pessoas</strong> — Começas a ser ouvido, levado a sério e admirado nos teus círculos.</div>
+    </li>
+    <li>
+      <div class="benefit-icon">✓</div>
+      <div><strong>Confiança que se vê</strong> — A tua linguagem corporal, tom de voz e presença começam a mudar.</div>
+    </li>
+    <li>
+      <div class="benefit-icon">✓</div>
+      <div><strong>Controlo emocional</strong> — Paras de reagir por impulso e começas a agir com intenção.</div>
+    </li>
+    <li>
+      <div class="benefit-icon">✓</div>
+      <div><strong>Clareza de vida</strong> — Sabes para onde vais, o que queres e como chegar lá.</div>
+    </li>
+    <li>
+      <div class="benefit-icon">✓</div>
+      <div><strong>Disciplina diária</strong> — Uma rotina sólida que te faz avançar mesmo quando não tens vontade.</div>
+    </li>
+  </ul>
+</section>
+
+<hr class="gold-divider">
+
+<!-- ══════════════════════════════ TRANSFORMAÇÃO ══════════════════════════════ -->
+<section class="section section--dark3 fade-in">
+  <span class="section-label">Transformação</span>
+  <h2 class="section-title">Antes <span>vs</span> Depois</h2>
+  <p class="section-desc" style="margin-bottom:24px;">Veja a diferença que o método faz na vida real.</p>
+
+  <div class="transform-grid">
+    <div class="transform-card before">
+      <h4>Antes</h4>
+      <ul>
+        <li>Inseguro</li>
+        <li>Ignorado</li>
+        <li>Sem direcção</li>
+        <li>Procrastina</li>
+        <li>Sem respeito</li>
+      </ul>
+    </div>
+    <div class="transform-arrow">➜</div>
+    <div class="transform-card after">
+      <h4>Depois</h4>
+      <ul>
+        <li>Confiante</li>
+        <li>Respeitado</li>
+        <li>Focado</li>
+        <li>Disciplinado</li>
+        <li>Com presença</li>
+      </ul>
+    </div>
+  </div>
+
+  <a href="https://pay.kursinha.com/c/69c1b9b3cd13c7734f7f5803" class="btn-cta" style="margin-top:28px;">
+    Quero ser o homem do DEPOIS
+    <span class="btn-sub">Acesso imediato · Garantia de 7 dias</span>
+  </a>
+</section>
+
+<!-- ══════════════════════════════ O QUE VAI RECEBER ══════════════════════════════ -->
+<section class="section section--dark2 fade-in">
+  <span class="section-label">O que inclui</span>
+  <h2 class="section-title">O que vais <span>receber</span></h2>
+
+  <ul class="receive-list">
+    <li>
+      <div class="receive-num">1</div>
+      <div><strong>Conteúdo directo e prático</strong> — Sem teoria vazia. Cada módulo vai directo ao que importa, com passos claros para aplicar no dia a dia.</div>
+    </li>
+    <li>
+      <div class="receive-num">2</div>
+      <div><strong>Estratégias aplicáveis no dia a dia</strong> — Técnicas reais que funcionam em Luanda, em Angola, no teu contexto — não copiadas de outro mundo.</div>
+    </li>
+    <li>
+      <div class="receive-num">3</div>
+      <div><strong>Método simples de seguir</strong> — Mesmo que nunca tenhas lido nada de desenvolvimento pessoal, vais conseguir aplicar.</div>
+    </li>
+    <li>
+      <div class="receive-num">4</div>
+      <div><strong>Acesso imediato e para sempre</strong> — Assim que fizeres o pagamento, recebes acesso instantâneo. O teu, para sempre.</div>
+    </li>
+  </ul>
+</section>
+
+<hr class="gold-divider">
+
+<!-- ══════════════════════════════ DEPOIMENTOS ══════════════════════════════ -->
+<section class="section fade-in">
+  <span class="section-label">Depoimentos</span>
+  <h2 class="section-title">O que dizem os <span>nossos alunos</span></h2>
+  <p class="section-desc" style="margin-bottom:28px;">Resultados reais de homens angolanos que já fizeram o método.</p>
+
+  <div class="testimonial-card">
+    <div class="testimonial-stars">★★★★★</div>
+    <p class="testimonial-text">"Mano, eu era daqueles que entrava na sala e ninguém me notava. Depois de aplicar o método, a minha chefe chamou-me para uma promoção sem eu pedir nada. A minha postura mudou mesmo. Recomendo a todo o homem que quer ser levado a sério."</p>
+    <div class="testimonial-author">
+      <div class="testimonial-avatar">KM</div>
+      <div>
+        <div class="testimonial-name">Kelvin M.</div>
+        <div class="testimonial-loc">Luanda, Angola ✅ Verificado</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-card">
+    <div class="testimonial-stars">★★★★★</div>
+    <p class="testimonial-text">"Eu não acreditava muito, mas resolvi arriscar porque o preço estava acessível. Não me arrependo. Em duas semanas já via diferença na forma como as pessoas me tratavam. A parte da disciplina foi o que mais me ajudou. Kamba, aplica mesmo."</p>
+    <div class="testimonial-author">
+      <div class="testimonial-avatar">JF</div>
+      <div>
+        <div class="testimonial-name">Jorge F.</div>
+        <div class="testimonial-loc">Huambo, Angola ✅ Verificado</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-card">
+    <div class="testimonial-stars">★★★★★</div>
+    <p class="testimonial-text">"Estava a sentir que toda a gente avançava menos eu. Comprei o método, apliquei, e hoje falo com muito mais segurança. Até nas minhas relações melhorou. A minha namorada disse que sou outro homem. Valeu cada kwanza."</p>
+    <div class="testimonial-author">
+      <div class="testimonial-avatar">DS</div>
+      <div>
+        <div class="testimonial-name">David S.</div>
+        <div class="testimonial-loc">Benguela, Angola ✅ Verificado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ SOBRE O MÉTODO ══════════════════════════════ -->
+<section class="section section--dark3 fade-in">
+  <span class="section-label">Sobre o Método</span>
+  <h2 class="section-title">Não é teoria. <span>É prática real.</span></h2>
+  <p class="section-desc" style="margin-bottom:28px;">O Código da Potência Masculina não é mais um livro de motivação que esqueces em 3 dias.</p>
+
+  <div class="method-steps">
+    <div class="method-step">
+      <div class="method-step-num">1</div>
+      <div class="method-step-text">
+        <h4>Diagnóstico</h4>
+        <p>Percebes onde estás realmente a falhar e porquê — sem ilusões, sem desculpas.</p>
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">2</div>
+      <div class="method-step-text">
+        <h4>Reprogramação</h4>
+        <p>Técnicas directas para mudar os padrões mentais que te mantêm preso.</p>
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">3</div>
+      <div class="method-step-text">
+        <h4>Acção imediata</h4>
+        <p>Exercícios práticos para aplicar ainda hoje e ver resultados rápidos.</p>
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">4</div>
+      <div class="method-step-text">
+        <h4>Consolidação</h4>
+        <p>Como manter os resultados e continuar a crescer todos os dias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gold-divider">
+
+<!-- ══════════════════════════════ GARANTIA ══════════════════════════════ -->
+<section class="section section--dark2 fade-in">
+  <span class="section-label">Zero Risco</span>
+  <div class="guarantee-box">
+    <span class="guarantee-icon">🛡️</span>
+    <h3>Garantia de 7 Dias</h3>
+    <p>Se aplicares o método durante 7 dias e não sentires nenhuma diferença, devolvemos o teu dinheiro. Sem perguntas. Sem complicação. O risco é todo nosso.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ URGÊNCIA + OFERTA ══════════════════════════════ -->
+<div class="urgency-bar">
+  ⚠️ ATENÇÃO: Oferta especial disponível por tempo limitado!
+</div>
+
+<section class="section fade-in">
+  <span class="section-label">Oferta Especial</span>
+  <h2 class="section-title" style="text-align:center; margin-bottom:24px;">Garante <span>agora</span> antes do preço subir</h2>
+
+  <div class="countdown-wrap">
+    <div class="countdown-unit"><strong id="cd-h">01</strong><span>Horas</span></div>
+    <div class="countdown-unit"><strong id="cd-m">59</strong><span>Minutos</span></div>
+    <div class="countdown-unit"><strong id="cd-s">59</strong><span>Segundos</span></div>
+  </div>
+
+  <div class="offer-box">
+    <div class="offer-badge">🔥 Desconto Especial Hoje</div>
+    <div class="offer-original">Valor normal: 10.000 Kz</div>
+    <div class="offer-price"><span>Kz</span> 5.500</div>
+    <div class="offer-once">Pagamento único · Acesso imediato · Para sempre</div>
+    <div class="offer-savings">💚 Poupes 4.500 Kz hoje!</div>
+
+    <a href="https://pay.kursinha.com/c/69c1b9b3cd13c7734f7f5803" class="btn-cta pulse">
+      Quero mudar minha vida agora
+      <span class="btn-sub">🔒 Pagamento 100% seguro · Acesso em segundos</span>
+    </a>
+    <p style="margin-top:18px; font-size:13px; color:#777;">🛡️ Garantia de 7 dias · Sem risco · Acesso imediato</p>
+  </div>
+</section>
+
+<hr class="gold-divider">
+
+<!-- ══════════════════════════════ FAQ ══════════════════════════════ -->
+<section class="section section--dark3 fade-in">
+  <span class="section-label">Dúvidas Frequentes</span>
+  <h2 class="section-title" style="margin-bottom:28px;">Perguntas <span>frequentes</span></h2>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      Isso funciona mesmo?
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-answer">Sim. O método foi testado com centenas de homens angolanos. Mas o resultado depende de ti — quem aplica, vê resultados. Quem só lê e não age, não vê. Nós damos a ferramenta. A decisão é tua.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      Em quanto tempo vejo resultados?
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-answer">Muitos alunos começam a notar diferenças em 7 a 14 dias. A postura, a confiança e a forma como as pessoas te tratam mudam rapidamente quando aplicas as técnicas correctamente.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      Preciso de experiência anterior?
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-answer">Não. O método foi desenhado para homens que começam do zero. Não precisas de ter lido nenhum livro de desenvolvimento pessoal antes. É simples, directo e prático.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      Como recebo o conteúdo?
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-answer">Após o pagamento, recebes acesso imediato ao conteúdo digital. Tudo online, disponível no teu telemóvel ou computador, a qualquer hora, em qualquer lugar.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      E se eu não gostar?
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-answer">Tens 7 dias de garantia total. Se por qualquer motivo não ficares satisfeito, devolvemos o teu dinheiro sem perguntas. O risco é zero da tua parte.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ CTA FINAL ══════════════════════════════ -->
+<section class="section" style="background: linear-gradient(180deg, #0d0d0d, #0A0A0A); text-align:center;" id="final-cta">
+  <span class="section-label" style="display:block; text-align:center;">Último aviso</span>
+  <h2 class="section-title" style="font-size: clamp(26px, 7vw, 42px); margin-bottom:16px;">
+    Se não agires agora,<br><span>nada vai mudar.</span>
+  </h2>
+  <p style="color:#bbb; font-size:17px; margin-bottom:28px; max-width:380px; margin-left:auto; margin-right:auto;">Amanhã vais acordar exatamente igual. A diferença entre o homem que és e o homem que podes ser é <strong style="color:#fff">uma decisão.</strong></p>
+
+  <div class="offer-original" style="font-size:18px;">10.000 Kz</div>
+  <div class="offer-price" style="font-family:'Oswald',sans-serif; font-size:52px; color:var(--gold); font-weight:700; line-height:1; margin:8px 0;">
+    <span style="font-size:22px; vertical-align:top; margin-top:10px; display:inline-block;">Kz</span> 5.500
+  </div>
+  <p style="color:var(--text-muted); font-size:14px; margin-bottom:28px;">Pagamento único · Acesso imediato</p>
+
+  <a href="https://pay.kursinha.com/c/69c1b9b3cd13c7734f7f5803" class="btn-cta pulse" style="max-width:420px; margin:0 auto; display:block;">
+    Quero mudar minha vida agora
+    <span class="btn-sub">🔒 Clica aqui e começa a transformação</span>
+  </a>
+  <p style="margin-top:18px; font-size:13px; color:#555;">🛡️ Garantia de 7 dias · Sem risco · Acesso em segundos</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:8px;">© 2025 Código da Potência Masculina. Todos os direitos reservados.</p>
+  <p>Este produto é 100% digital. Resultados podem variar.</p>
+</footer>
+
+<!-- FLOATING CTA -->
+<div class="floating-cta" id="floatingCta">
+  <a href="https://pay.kursinha.com/c/69c1b9b3cd13c7734f7f5803" class="btn-cta" style="font-size:16px; padding:16px 20px;">
+    🔥 Quero mudar minha vida — 5.500 Kz
+  </a>
+</div>
+
+<script>
+  // ── FADE-IN ON SCROLL ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ── FAQ ACCORDION ──
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ── FLOATING CTA (appears after 40% scroll) ──
+  const floatingCta = document.getElementById('floatingCta');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    const finalCta = document.getElementById('final-cta');
+    const finalTop = finalCta.getBoundingClientRect().top;
+    if (scrolled > 0.35 && finalTop > 100) {
+      floatingCta.classList.add('visible');
+    } else {
+      floatingCta.classList.remove('visible');
+    }
+  });
+
+  // ── COUNTDOWN TIMER ──
+  function startCountdown() {
+    let total = 1 * 3600 + 59 * 60 + 59;
+    const h = document.getElementById('cd-h');
+    const m = document.getElementById('cd-m');
+    const s = document.getElementById('cd-s');
+    const tick = () => {
+      if (total <= 0) { h.textContent = '00'; m.textContent = '00'; s.textContent = '00'; return; }
+      total--;
+      const hours = Math.floor(total / 3600);
+      const mins  = Math.floor((total % 3600) / 60);
+      const secs  = total % 60;
+      h.textContent = String(hours).padStart(2,'0');
+      m.textContent = String(mins).padStart(2,'0');
+      s.textContent = String(secs).padStart(2,'0');
+      setTimeout(tick, 1000);
+    };
+    tick();
+  }
+  startCountdown();
+
+  // ── SMOOTH CTA PULSE ON LOAD ──
+  window.addEventListener('load', () => {
+    document.querySelector('.hero .btn-cta').classList.add('pulse');
+  });
+</script>
+</body>
+</html>
